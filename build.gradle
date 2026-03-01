@@ -34,19 +34,13 @@ legacyForge {
 
     parchment {
         mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
+        minecraftVersion = project.minecraft_version
     }
 
-    // This line is optional. Access Transformers are automatically detected
-    // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
-
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             client()
 
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         }
 
@@ -56,9 +50,6 @@ legacyForge {
             systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         }
 
-        // This run config launches GameTestServer and runs all registered gametests, then exits.
-        // By default, the server will crash when no gametests are provided.
-        // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             type = "gameTestServer"
             systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
@@ -67,10 +58,6 @@ legacyForge {
         data {
             data()
 
-            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
-            // gameDirectory = project.file('run-data')
-
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
@@ -91,10 +78,6 @@ legacyForge {
     }
 
     mods {
-        // define mod <-> source bindings
-        // these are used to tell the game which sources are for which mod
-        // mostly optional in a single mod project
-        // but multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(sourceSets.main)
         }
@@ -115,31 +98,65 @@ obfuscation {
     createRemappingConfiguration(configurations.localRuntime)
 }
 
+repositories {
+    maven {
+        name = 'jei'
+        url = 'https://maven.blamejared.com/'
+        content { includeGroup "mezz.jei" }
+    }
+    maven {
+        name = "Patchouli"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        name = 'ModKit'
+        url 'https://jitpack.io'
+        content { includeGroup 'com.github.thedarkcolour' }
+    }
+    maven {
+        name 'DVS1 Maven FS'
+        url 'https://dvs1.progwml6.com/files/maven'
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+
 dependencies {
-    // If you wish to declare dependencies against mods, make sure to use the 'mod*' configurations so that they're remapped.
-	// See https://github.com/neoforged/ModDevGradle/blob/main/LEGACY.md#remapping-mod-dependencies for more information.
-	
-    // Example optional mod dependency with JEI
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // modCompileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    // modCompileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
-    // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
-    // modLocalRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    // JEI OPTIONAL
+    modCompileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    modCompileOnly "mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"
+    modRuntimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
+    // PATCHOULI REQUIRED
+    modCompileOnly "vazkii.patchouli:Patchouli:${patchouli_version}-FORGE:api"
+    modRuntimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}-FORGE"
+    // ModKit DEV ONLY
+    modImplementation 'com.github.thedarkcolour:ModKit:cc8f1c11ec'
+    // FORESTRY REQUIRED
+    modImplementation "maven.modrinth:forestry-community-edition:${forestry_version}"
+    // Curios Optional
+    //modImplementation "top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}"
 
-    // Example mod dependency using a mod jar from ./libs with a flat dir repository
-    // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
-    // The group id is ignored when searching -- in this case, it is "blank"
-    // modImplementation "blank:coolmod-${mc_version}:${coolmod_version}"
+    //modImplementation 'maven.modrinth:cofh-core:11.0.2'
+    //modImplementation 'maven.modrinth:thermal-foundation:11.0.6'
+    //modImplementation 'maven.modrinth:thermal-dynamics:11.0.1'
 
-    // Example mod dependency using a file as dependency
-    // modImplementation files("libs/coolmod-${mc_version}-${coolmod_version}.jar")
-
-    // Example project dependency using a sister or child project:
-    // modImplementation project(":myproject")
-
-    // For more info:
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    // DEV ONLY
+    compileOnly 'org.jetbrains:annotations:23.0.0'
 }
 
 // Uncomment the lines below if you wish to configure mixin. The mixin file should be named modid.mixins.json.
