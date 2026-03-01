@@ -1,0 +1,3 @@
+[submodule "Binnie"]
+	path = Binnie
+	url = https://github.com/ForestryMC/Binnie.git
