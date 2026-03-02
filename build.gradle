@@ -120,8 +120,9 @@ repositories {
         content { includeGroup 'com.github.thedarkcolour' }
     }
     maven {
-        name 'DVS1 Maven FS'
-        url 'https://dvs1.progwml6.com/files/maven'
+        name = 'Curios'
+        url = 'https://maven.theillusivec4.top/'
+        content { includeGroup 'top.theillusivec4.curios' }
     }
     exclusiveContent {
         forRepository {
@@ -149,7 +150,7 @@ dependencies {
     // FORESTRY REQUIRED
     modImplementation "maven.modrinth:forestry-community-edition:${forestry_version}"
     // Curios Optional
-    //modImplementation "top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}"
+    modImplementation "top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}"
 
     //modImplementation 'maven.modrinth:cofh-core:11.0.2'
     //modImplementation 'maven.modrinth:thermal-foundation:11.0.6'
