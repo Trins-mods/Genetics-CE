@@ -8,7 +8,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModItems {
+public class GeneticsItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, GeneticsCE.ID);
 
     public static final RegistryObject<Item> PUNNETT_SQUARE = ITEMS.register("punnett_square", () -> new Item(new Properties()));
