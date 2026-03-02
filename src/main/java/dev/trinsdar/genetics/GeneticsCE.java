@@ -1,5 +1,6 @@
 package dev.trinsdar.genetics;
 
+import dev.trinsdar.genetics.init.GeneticsCreativeTabs;
 import dev.trinsdar.genetics.init.ModItems;
 import net.minecraftforge.fml.common.Mod;
 
@@ -9,5 +10,6 @@ public class GeneticsCE {
 
     public GeneticsCE(){
         ModItems.init();
+        GeneticsCreativeTabs.init();
     }
 }
