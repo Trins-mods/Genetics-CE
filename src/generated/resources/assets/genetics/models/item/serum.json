@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "genetics:item/serum_glass",
+    "layer1": "genetics:item/serum_cap",
+    "layer2": "genetics:item/serum_edges",
+    "layer3": "genetics:item/serum_dna"
+  }
+}
