@@ -6,7 +6,9 @@ import forestry.api.genetics.IBreedingTracker;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IMutation;
 import forestry.api.genetics.ISpeciesType;
+import forestry.api.genetics.ITaxon;
 import forestry.api.genetics.alleles.IAllele;
+import forestry.api.genetics.alleles.IChromosome;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -27,9 +29,9 @@ public interface IBreedingSystem {
 
 	//Collection<IAlleleSpecies> getDiscoveredSpecies(Level world, GameProfile player);
 
-	//List<IClassification> getAllBranches();
+	List<ITaxon> getAllBranches();
 
-	//Collection<IClassification> getDiscoveredBranches(Level world, GameProfile player);
+	Collection<ITaxon> getDiscoveredBranches(Level world, GameProfile player);
 
 	List<IMutation<?>> getDiscoveredMutations(Level world, GameProfile player);
 
@@ -41,11 +43,11 @@ public interface IBreedingSystem {
 
 	//float getChance(IMutation mutation, Player player, IAlleleSpecies firstSpecies, IAlleleSpecies secondSpecies);
 
-	//String getAlleleName(final IChromosomeType chromosome, final IAllele allele);
+	String getAlleleName(final IChromosome<?> chromosome, final IAllele allele);
 
-	//String getChromosomeName(final IChromosomeType chromo);
+	String getChromosomeName(final IChromosome<?> chromo);
 
-	//String getChromosomeShortName(final IChromosomeType chromo);
+	String getChromosomeShortName(final IChromosome<?> chromo);
 
 	@Nullable
 	IIndividual getConversion(final ItemStack stack);
@@ -105,9 +107,9 @@ public interface IBreedingSystem {
 
 	//boolean isSecret(IAlleleSpecies species);
 
-	//boolean isSecret(IClassification branch);
+	boolean isSecret(ITaxon branch);
 
-	//Collection<IClassification> getDiscoveredBranches(IBreedingTracker tracker);
+	Collection<ITaxon> getDiscoveredBranches(IBreedingTracker tracker);
 
 	//Collection<IAlleleSpecies> getDiscoveredSpecies(IBreedingTracker tracker);
 
@@ -130,7 +132,7 @@ public interface IBreedingSystem {
 
 	boolean isDNAManipulable(ItemStack stack);
 
-	boolean isDNAManipulable(ISpeciesType type);
+	boolean isDNAManipulable(ISpeciesType<?, ?> type);
 
 	IIndividual getDefaultIndividual();
 

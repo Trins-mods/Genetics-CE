@@ -6,9 +6,9 @@ import dev.trinsdar.core.api.gui.IWidget;
 import forestry.api.genetics.IIndividual;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collection;
 
@@ -29,18 +29,18 @@ public interface IAnalystManager {
 
 	Collection<ItemStack> getAllProductsAndFluids(Collection<ItemStack> collection);
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	IAnalystIcons getIcons();
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	<T extends IIndividual> ITitledWidget createClimatePage(IWidget parent, IArea area, T ind, IClimatePlugin<T> plugin);
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	<T extends IIndividual> ITitledWidget createBiologyPage(IWidget parent, IArea area, T ind, IBiologyPlugin<T> plugin);
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	<T extends IIndividual> ITitledWidget createBehaviorPage(IWidget parent, IArea area, T ind, IBehaviourPlugin<T> behaviourPlugin);
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	int drawRefined(IWidget parent, String string, int y, Collection<ItemStack> products);
 }

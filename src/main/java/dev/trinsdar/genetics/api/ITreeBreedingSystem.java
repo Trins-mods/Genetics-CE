@@ -9,11 +9,11 @@ import java.util.Collection;
 import java.util.Set;
 
 public interface ITreeBreedingSystem extends IBreedingSystem {
-	//Collection<IAlleleSpecies> getTreesThatBearFruit(ItemStack fruit, boolean master, Level world, GameProfile player);
+	Collection<IAlleleSpecies> getTreesThatBearFruit(ItemStack fruit, boolean master, Level world, GameProfile player);
 
-	//Collection<IAlleleSpecies> getTreesThatCanBearFruit(ItemStack fruit, boolean master, Level world, GameProfile player);
+	Collection<IAlleleSpecies> getTreesThatCanBearFruit(ItemStack fruit, boolean master, Level world, GameProfile player);
 
-	//Collection<IAlleleSpecies> getTreesThatHaveWood(ItemStack wood, boolean master, Level world, GameProfile player);
+	Collection<IAlleleSpecies> getTreesThatHaveWood(ItemStack wood, boolean master, Level world, GameProfile player);
 
 	Set<ItemStack> getAllFruits();
 
