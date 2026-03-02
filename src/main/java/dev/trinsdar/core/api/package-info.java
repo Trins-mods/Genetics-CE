@@ -2,6 +2,7 @@
 @MethodsReturnNonnullByDefault
 package dev.trinsdar.core.api;
 
-import mcp.MethodsReturnNonnullByDefault;
+
+import com.mojang.blaze3d.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
